@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     <title>
         @yield('title')
     </title>
@@ -63,9 +65,9 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="{{ route('home') }}" class="nav-link px-2 text-secondary">Главная</a></li>
-                    <li><a href="{{ route('about') }}" class="nav-link px-2 text-white">О нас</a></li>
-                    <li><a href="{{ route('reviews') }}" class="nav-link px-2 text-white">Отзывы</a></li>
+                    <li><a href="" class="nav-link px-2 text-secondary">Главная</a></li>
+                    <li><a href="" class="nav-link px-2 text-white">О нас</a></li>
+                    <li><a href="" class="nav-link px-2 text-white">Отзывы</a></li>
                 </ul>
 
                 {{-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

@@ -8,7 +8,7 @@ use App\Models\ReviewsModel;
 
 class MainController extends Controller
 {
-    public function home() {
+    public function main() {
         return view('welcome');
     }
 
