@@ -27,6 +27,10 @@ Route::get('/reviews', [MainController::class, 'reviews']) ->name('reviews');
 Route::post('/reviews/check', [ MainController::class, 'reviews_check']);
 Route::get('/reviews/{id}', [ MainController::class, 'show_one_reviews' ])->name('review-one');
 
+
+Route::get('/search', [MainController::class, 'search']) ->name('search');
+
+
 // Редактирование/удаление отзывов
 Route::get('/reviews/{id}/edit}', [ MainController::class, 'review_edit' ])->name('review-edit');
 Route::post('/reviews/{id}/edit}', [ MainController::class, 'review_edit_submit' ])->name('review-edit-submit');

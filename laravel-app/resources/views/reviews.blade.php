@@ -41,16 +41,31 @@
     <br>
     <hr>
     <h2>Все отзывы</h2>
-    <br>
-    <div class="row gap-5">
-        @foreach ($reviews as $el)
-            <div class="alert alert-warning col">
-                <h3>{{ $el->name }}</h3>
-                <p>{{ $el->email }}</p>
-                <p>{{ $el->massage }}</p>
 
-                <a href="{{ route('review-one', $el->id) }}" class="btn btn-success">Подробнее</a>
+    <form method="GET" action="{{ route('search') }}" class="inline-flex gap-4 mt-10 mb-10" role="search">
+        <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+            aria-label="Search" id="s" name="s">
+        <button type="submit" class="btn btn-success">Поиск</button>
+    </form>
+
+    <br>
+    <div class="grid grid-cols-3 gap-6">
+        @if ($reviews)
+            @foreach ($reviews as $el)
+                <div class="alert alert-warning">
+                    <h3>{{ $el->name }}</h3>
+                    <p>{{ $el->email }}</p>
+                    <p>{{ $el->massage }}</p>
+
+                    <a href="{{ route('review-one', $el->id) }}" class="btn btn-success">Подробнее</a>
+                </div>
+            @endforeach
+            <div class="p-7">
+                {{ $reviews->links() }}
             </div>
-        @endforeach
+        @else
+            ничего не найдено
+        @endif
     </div>
+
 @endsection

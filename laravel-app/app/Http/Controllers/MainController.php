@@ -18,7 +18,9 @@ class MainController extends Controller
 
     public function reviews() {
         $reviews = new ReviewsModel();
-        return view('reviews', ['reviews' => $reviews->all()]);
+        $reviews =  $reviews->paginate(6);
+
+        return view('reviews', ['reviews' => $reviews]);
     }
 
     public function reviews_check(Request $request) {
@@ -70,5 +72,11 @@ class MainController extends Controller
     public function delete_review($id) {
         ReviewsModel::find($id)->delete();
         return redirect()->route('reviews');
+    }
+
+    public function search(Request $request) {
+        $s = $request->input('s'); // Предполагаем, что 'search' - это имя параметра из запроса
+        $reviews = ReviewsModel::where('name', 'like', "%{$s}%")->paginate(6);
+        return view('reviews', ['reviews' => $reviews]);
     }
 }
