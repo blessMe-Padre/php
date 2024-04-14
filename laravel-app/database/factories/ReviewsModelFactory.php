@@ -20,6 +20,7 @@ class ReviewsModelFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'massage' => fake()->text(),
+            'user_id' => fake()->numberBetween(1,10),
             'created_at' => fake()->dateTime(),
             'updated_at' => fake()->dateTime(),
         ];

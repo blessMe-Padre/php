@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\ReviewsModel;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -33,6 +34,10 @@ class MainController extends Controller
         $review->name = $request->input('name');
         $review->email = $request->input('email');
         $review->massage = $request->input('massage');
+
+        if (Auth::check()) { // Проверяем, авторизован ли пользователь
+            $review->user_id = Auth::id(); // Получаем ID пользователя и присваиваем его свойству user_id
+        }
 
         $review->save();
 
@@ -76,6 +81,7 @@ class MainController extends Controller
 
     public function search(Request $request) {
         $s = $request->input('s'); // Предполагаем, что 'search' - это имя параметра из запроса
+        dd($s);
         $reviews = ReviewsModel::where('name', 'like', "%{$s}%")->paginate(6);
         return view('reviews', ['reviews' => $reviews]);
     }

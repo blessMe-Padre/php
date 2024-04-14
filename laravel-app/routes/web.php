@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
 
+use App\Models\ReviewsModel;
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +23,21 @@ Route::get('/', [MainController::class, 'main'])->name('main');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'admin'])->name('home');
+
+
+Route::get('/test', function() {
+    $users = new User();
+    $users = $users->all();
+    foreach ($users as $user) {
+        echo 'Имя пользователя: ' . $user->name . '<br>';
+
+        foreach ($user->reviews as $review) {
+            echo 'отзыв ' . $review->massage . '<br>';
+        }
+        echo '--------------------------------------';
+        echo '<br>';
+    }
+});
 
 
 // Роуты отзывов
