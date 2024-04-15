@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\ReviewsModel;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
@@ -83,8 +84,27 @@ class MainController extends Controller
 
     public function search(Request $request) {
         $s = $request->input('s'); // Предполагаем, что 'search' - это имя параметра из запроса
-        dd($s);
         $reviews = ReviewsModel::where('name', 'like', "%{$s}%")->paginate(6);
         return view('reviews', ['reviews' => $reviews]);
     }
+
+    // public function live_search(Request $request) {
+    //     $users = new User();
+    //     $users = $users->all();
+    //     return view('live-search', ['users' => $users]);
+    // }
+
+    public function live_search(Request $request) {
+        $query = $request->get('s2');
+        $users = User::where('name', 'LIKE', "%{$query}%")->get();
+
+        if ($request->ajax()) {
+            return response()->json(view('partials.user_list', ['users' => $users])->render());
+        } else {
+            // Для не-AJAX запроса, если такие могут быть
+            return view('live-search', ['users' => $users]);
+        }
+    }
+
+
 }

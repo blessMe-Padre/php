@@ -39,6 +39,9 @@ Route::get('/test', function() {
     }
 });
 
+Route::post('/test2', [MainController::class, 'live_search'])->name('live-search');
+
+
 
 // Роуты отзывов
 Route::get('/reviews', [MainController::class, 'reviews']) ->name('reviews');
@@ -48,18 +51,14 @@ Route::get('/reviews/{id}', [ MainController::class, 'show_one_reviews' ])->name
 
 Route::get('/search', [MainController::class, 'search']) ->name('search');
 
-
 // Редактирование/удаление отзывов
 Route::get('/reviews/{id}/edit}', [ MainController::class, 'review_edit' ])->name('review-edit');
 Route::post('/reviews/{id}/edit}', [ MainController::class, 'review_edit_submit' ])->name('review-edit-submit');
 Route::get('/reviews/{id}/delete}', [ MainController::class, 'delete_review' ])->name('review-delete');
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
